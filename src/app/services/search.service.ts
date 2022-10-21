@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
@@ -28,12 +28,17 @@ export class SearchService {
   constructor(private http: HttpClient, private localStorage: LocalStorageService) {}
 
   getResults({title, type, year, page}: QueryParams): Observable<SearchResult> {
-    const titleURL = `&s=${title}`
-    const pageURL = `&page=${page + 1}`;
-    const typeURL = type ? `&type=${type}` : '';
-    const yearURL = year ? `&y=${year}`  : '';
-    const url = 'https://www.omdbapi.com/?apikey=a7fc67d0' + titleURL + typeURL + yearURL + pageURL
-    return this.http.get<SearchResult>(url)
+    let queryParams = new HttpParams();
+    queryParams = queryParams.set('s', title)
+    queryParams = queryParams.set('page', page + 1  )
+    if (type) {
+      queryParams = queryParams.set('type', type)
+    }
+    if (year) {
+      queryParams = queryParams.set('y', year)
+    }
+    const url = 'https://www.omdbapi.com/?apikey=a7fc67d0';
+    return this.http.get<SearchResult>(url, {params: queryParams})
   }
 
   setPage(page: number): void {

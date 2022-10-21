@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Movie } from 'src/app/interfaces/search-data.interface';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -20,7 +20,7 @@ export class MovieComponent {
 
   visited$ = this.activatedRoute.params.pipe(
     switchMap(({id}: Params) =>
-      forkJoin(
+      combineLatest(
         this.localStorage.getItemsToDisplay(id).map((id) => {
           return this.search.getSingleMovie(id);
         })

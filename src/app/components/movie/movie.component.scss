@@ -16,9 +16,41 @@
 
   .description {
     background-color: #FFFFFF;
-    height: 100%;
+    height: calc(100% - 40px);
     border-radius: 5px;
     flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .heading {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      .left-section {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          font-size: 30px;
+          padding-bottom: 10px;
+          line-height: 120%;
+        }
+
+        p {
+          margin: 0;
+        }
+
+      }
+    }
+
+    .plot {
+      padding: 30px 0;
+      div {
+        font-size: 16px;
+      }
+    }
   }
 
   .image {
