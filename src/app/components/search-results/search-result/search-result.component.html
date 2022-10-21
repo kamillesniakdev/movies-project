@@ -1,0 +1,9 @@
+<div class="poster">
+  <img src="{{result?.Poster}}" (error)="setPlaceholder()" alt="Movie poster">
+</div>
+<div class="text-area">
+  <div class="title">{{result?.Title}}</div>
+  <span>{{result?.Type | titlecase}}</span>
+  <span class="divider" *ngIf="result?.Year"></span>
+  <span>{{result?.Year}}</span>
+</div>

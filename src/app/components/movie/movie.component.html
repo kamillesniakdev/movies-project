@@ -1,0 +1,26 @@
+<div *ngIf="(movie$ | async) as movie" class="content">
+  <img class="image" src="{{movie.Poster}}" (error)="img.src='assets/images/placeholder.png'" alt="Movie poster" #img>
+  <div class="description">
+    <div>
+      <div>
+        <dt>Title</dt>
+        <dd>{{movie.Title}}</dd>
+        <dt>Rating</dt>
+        <dd>{{movie.Ratings}}</dd>
+      </div>
+      <p>{{movie.Genre}}</p>
+      <p>{{movie.Year}}</p>
+    </div>
+    <p>{{movie.Plot}}</p>
+    <p>{{movie.Director}}</p>
+    <p>{{movie.Writer}}</p>
+  </div>
+</div>
+<div class="visited">
+  <div class="heading">Recently visited:</div>
+  <div class="items">
+    <div *ngFor="let item of (visited$ | async)" class="item">
+      <app-search-result [result]="item" [routerLink]="['/movie', item.imdbID]"></app-search-result>
+    </div>
+  </div>
+</div>

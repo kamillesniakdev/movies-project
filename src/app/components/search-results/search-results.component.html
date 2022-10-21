@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="results">
+        <div class="result" *ngFor="let result of (results$ | async)">
+            <app-search-result
+                [routerLink]="['/movie', result.imdbID]"
+                [result]="result">
+            </app-search-result>
+        </div>
+    </div>
+    <mat-paginator *ngIf="!(isLoading$ | async)"
+    [hidePageSize]="true"
+    [pageSize]="10"
+    [pageIndex]="(page | async) ?? 0"
+    [length]="(avaliableItems$ | async) ?? 0"
+    (page)="onPageChange($event)">
+    </mat-paginator>
+    <div class="loading-spinner" *ngIf="isLoading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

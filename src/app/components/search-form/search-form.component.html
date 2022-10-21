@@ -1,0 +1,29 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="search-form">
+  <div class="search-bar">
+    <button mat-raised-button type="button" (click)="toggleFilters()">
+      <mat-icon>filter_list</mat-icon>
+      <span></span>
+    </button>
+    <mat-form-field class="title-input" appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="filtersOpen" class="filters">
+    <mat-form-field appearance="fill" class="dropdown">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="movie">Movie</mat-option>
+        <mat-option value="series">Series</mat-option>
+        <mat-option value="episode">Episode</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="input">
+      <mat-label>Year of release</mat-label>
+      <input matInput type="year" formControlName="year">
+    </mat-form-field>
+  </div>
+</form>
